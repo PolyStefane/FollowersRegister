@@ -1,0 +1,61 @@
+.card-modal {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: black;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  height: 15rem;
+  box-sizing: border-box;
+}
+
+.card-modal:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  background-color: #d9eef8;
+  padding: 16px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.card-body {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+ 
+.card-body img {
+  padding: 16px;
+  background-size: cover;
+  height: 5rem;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.card-body p {
+  margin: 8px 0;
+}
+
+.schedule-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.schedule-button:hover {
+  background-color: #2980b9;
+}
+
+.card-footer {
+  padding: 14px;
+  text-align: left;
+}

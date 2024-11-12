@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import { Follower } from "./types/follower.js";
+import Register from "./components/Register/index.js";
+import FollowersList from "./components/FollowersList/index.js";
+import NavBar from "./components/NavBar/index.js";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedFollower, setSelectedFollower] = useState<Follower | null>(null);
+
+  const getFollowerFromLocalStorage = (id: number): Follower | undefined => {
+    const followers = localStorage.getItem("followers");
+    if (followers) {
+      const parsedFollowers: Follower[] = JSON.parse(followers);
+      return parsedFollowers.find(f => f.id === id);
+    }
+    return undefined;
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const selectedFollowerId = urlParams.get("selectedFollower");
+
+    if (selectedFollowerId) {
+      const id = parseInt(selectedFollowerId, 10);
+      const follower = getFollowerFromLocalStorage(id);
+
+      if (follower) {
+        setSelectedFollower(follower);
+      }
+    }
+  }, []);
+
+  const handleEditFollower = (follower: Follower) => {
+    setSelectedFollower(follower);
+    window.location.href = `/?selectedFollower=${follower.id}`;
+  };
+
+  const handleSaveFollower = () => {
+    setSelectedFollower(null);
+    window.location.href = "/followers";
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Register
+                selectedFollower={selectedFollower}
+                onSave={handleSaveFollower}
+              />
+            }
+          />
+          <Route
+            path="/followers"
+            element={<FollowersList onEdit={handleEditFollower} />}
+          />
+        </Routes>
+        <NavBar />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
