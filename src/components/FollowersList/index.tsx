@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card";
 import { Follower } from "../../types";
 import "./index.css"
-
+import Swal from 'sweetalert2';
 
 interface FollowersListProps {
   onEdit: (follower: Follower) => void;
@@ -34,6 +34,15 @@ const FollowersList: React.FC<FollowersListProps> = ({ onEdit }) => {
     saveFollowersToStorage(updatedFollowers);
     setFollowers(updatedFollowers);
     setMessage("Seguidor excluído com sucesso!");
+    Swal.fire({
+      icon: 'success',
+      text: 'Seguidor excluído com sucesso!',
+      customClass: {
+        title: 'custom-title',
+        confirmButton: 'custom-button',
+        popup: 'custom-popup',
+      }
+    });      
   };
 
   return (

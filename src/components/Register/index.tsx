@@ -2,6 +2,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import ImageSlider from "../ImageSlider";
 import { useNavigate } from "react-router-dom";
 import { Follower } from "../../types";
+import Swal from 'sweetalert2';
+import "./index.css";
 
 interface RegisterProps {
   selectedFollower: Follower | null;
@@ -14,6 +16,7 @@ function Register({ selectedFollower, onSave }: RegisterProps) {
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
 
   const images: string[] = [
     "/img/Hippo_form.webp",
@@ -63,8 +66,123 @@ function Register({ selectedFollower, onSave }: RegisterProps) {
     }));
   };
 
-  const handleClickButton = () => {
+
+  const handleClickButton = async () => {
     setLoading(true);
+
+    const missingFields = [
+      !values.name,
+      !values.gender,
+      !values.nivel,
+      !values.occupation,
+      !values.image
+    ];
+    
+    const missingCount = missingFields.filter(field => field).length;
+
+    if (missingCount >= 2) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Há pelo menos dois dados faltantes. Você está prestando atenção? ಠ_ಠ ',
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (!values.name) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Por favor, insira o nome do seguidor.',
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });      
+      setLoading(false);
+      return;
+    }
+
+    if (!values.gender) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Por favor, insira o gênero do seguidor.',
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });      
+      setLoading(false);
+      return;
+    }
+
+    if(!values.nivel){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Por favor, insira o nível de devoção.',
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });      
+      setLoading(false);
+      return;
+    }
+
+    if (!values.occupation) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Por favor, selecione uma ocupação.',
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });      
+      setLoading(false);
+      return;
+    }
+
+    if (!selectedImage) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Por favor, selecione uma forma para o seguidor.',
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });      
+      setLoading(false);
+      return;
+    }
+
+
+    const showSuccessPopup = (message: string) => {
+      return Swal.fire({
+        icon: 'success',
+        text: message,
+        customClass: {
+          title: 'custom-title',
+          confirmButton: 'custom-button',
+          popup: 'custom-popup',
+        }
+      });
+    };
+
     const followers = loadFollowersFromStorage();
     
     if (selectedFollower) {
@@ -72,12 +190,12 @@ function Register({ selectedFollower, onSave }: RegisterProps) {
         follower.id === selectedFollower.id ? { ...follower, ...values, image: selectedImage != null ? selectedImage : follower.image} : follower
       );
       saveFollowersToStorage(updatedFollowers);
-      setMessage("Seguidor atualizado com sucesso!");
+      await showSuccessPopup('Seguidor atualizado com sucesso!');     
     } else {
       const newFollower = { ...values, id: new Date().getTime(), image: selectedImage || "" };
       followers.push(newFollower);
       saveFollowersToStorage(followers);
-      setMessage("Seguidor inserido com sucesso!");
+      await showSuccessPopup('Seguidor inserido com sucesso!');
     }
 
     onSave();

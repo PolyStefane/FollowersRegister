@@ -26,3 +26,28 @@ followers-container {
     max-height: calc(100vh - altura_do_header); /* Altura ajustada para caber na tela */
   overflow-y: auto; /* Permite rolagem interna apenas nesse contêiner, se necessário */
 }
+
+.custom-title {
+    color: #ecedf0;  /* Cor do título */
+    font-size: 1.8rem;  /* Tamanho do título */
+  }
+  
+  .custom-button {
+    background-color: #7F0C16; /* Cor do botão */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .custom-button:hover {
+    background-color: #FD172C; /* Efeito de hover no botão */
+  }
+
+  .custom-popup {
+    background-color: #000000; /* Cor de fundo personalizada */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para o modal */
+  }
+  
