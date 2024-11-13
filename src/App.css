@@ -30,14 +30,50 @@ body{
 
 }
 
-.register-title{
+.register-title {
   font-size: 2.5rem;
   color: #FD172C;
   text-align: center;
   margin-bottom: 20px;
-  /* font-family: monospace; */
   font-family: 'IM Fell DW Pica', serif;
+  position: relative;
+  text-shadow: 
+      0 0 5px #8B0000, 
+      0 0 10px #8B0000, 
+      0 0 15px #B22222, 
+      0 0 20px #FF0000, 
+      0 0 30px #8B0000;
+  animation: eerie-glow 2s infinite alternate;
+}
 
+@keyframes eerie-glow {
+  0% {
+    opacity: 1;
+    text-shadow: 
+        0 0 5px #8B0000, 
+        0 0 10px #8B0000, 
+        0 0 15px #B22222, 
+        0 0 20px #FF0000, 
+        0 0 30px #8B0000;
+  }
+  50% {
+    opacity: 0.9;
+    text-shadow: 
+        0 0 10px #8B0000, 
+        0 0 20px #B22222, 
+        0 0 30px #FF0000, 
+        0 0 40px #8B0000, 
+        0 0 50px #B22222;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 
+        0 0 5px #8B0000, 
+        0 0 15px #B22222, 
+        0 0 25px #FF0000, 
+        0 0 35px #8B0000, 
+        0 0 45px #B22222;
+  }
 }
 
 .register-form {
@@ -144,11 +180,10 @@ body{
 
 /* Followers list */
 .followers-container{
-  font-family: monospace;
   font-size: large;
   width: 100%;
-  min-height: 100vh;
-  padding: 50px;
+  min-height: 88vh;
+  padding: 30px;
   box-sizing: border-box;
 }
 
@@ -162,20 +197,10 @@ body{
   margin-left: 10px;
 }
 
-/* .nav-container {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-} */
-
 .followers-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta o número de colunas automaticamente */
-  gap: 20px; /* Espaço entre os itens */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 20px; 
 }
 
 .follower-card {

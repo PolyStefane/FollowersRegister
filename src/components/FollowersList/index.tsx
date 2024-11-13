@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../Card";
 import { Follower } from "../../types";
+import "./index.css"
 
 
 interface FollowersListProps {

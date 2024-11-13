@@ -1,0 +1,28 @@
+h2 {
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 45px;
+    color: #1a1818; 
+    display: flex;
+    justify-content: center;
+    text-shadow: 0 0 5px #FF0000, 0 0 10px #FF0000, 0 0 15px #8B0000, 0 0 20px #8B0000;
+    animation: flicker 1.5s infinite alternate;
+}
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        text-shadow: 0 0 5px #FF0000, 0 0 10px #FF0000, 0 0 15px #8B0000, 0 0 20px #8B0000;
+    }
+    50% {
+        opacity: 0.8;
+        text-shadow: 0 0 10px #FF0000, 0 0 20px #FF0000, 0 0 30px #8B0000, 0 0 40px #8B0000;
+    }
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 5px #FF0000, 0 0 10px #FF0000, 0 0 15px #8B0000, 0 0 20px #8B0000;
+    }
+}
+
+followers-container {
+    max-height: calc(100vh - altura_do_header); /* Altura ajustada para caber na tela */
+  overflow-y: auto; /* Permite rolagem interna apenas nesse contêiner, se necessário */
+}
