@@ -33,7 +33,6 @@ const FollowersList: React.FC<FollowersListProps> = ({ onEdit }) => {
     const updatedFollowers = followers.filter(f => f.id !== id);
     saveFollowersToStorage(updatedFollowers);
     setFollowers(updatedFollowers);
-    setMessage("Seguidor excluído com sucesso!");
     Swal.fire({
       icon: 'success',
       text: 'Seguidor excluído com sucesso!',
