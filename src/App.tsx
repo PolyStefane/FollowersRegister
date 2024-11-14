@@ -43,7 +43,6 @@ function App() {
 
   const handleSaveFollower = () => {
     setSelectedFollower(null);
-    window.location.href = "/followers";
   };
 
   return (

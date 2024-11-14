@@ -199,6 +199,7 @@ function Register({ selectedFollower, onSave }: RegisterProps) {
     onSave();
     setValues({ name: "", gender: "", nivel: 0, occupation: "", image: "" });
     setLoading(false);
+    window.location.href="/followers";
   };
 
   const handleSelectImage = (image: string) => {
