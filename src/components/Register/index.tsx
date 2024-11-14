@@ -1,6 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import ImageSlider from "../ImageSlider";
-import { useNavigate } from "react-router-dom";
 import { Follower } from "../../types";
 import Swal from 'sweetalert2';
 import "./index.css";
@@ -12,7 +11,6 @@ interface RegisterProps {
 
 function Register({ selectedFollower, onSave }: RegisterProps) {
   const [values, setValues] = useState<Follower>({ name: "", gender: "", nivel: 0, occupation: "", image: "" });
-  const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
