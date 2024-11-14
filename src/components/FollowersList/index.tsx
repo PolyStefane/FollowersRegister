@@ -10,7 +10,7 @@ interface FollowersListProps {
 
 const FollowersList: React.FC<FollowersListProps> = ({ onEdit }) => {
   const [followers, setFollowers] = useState<Follower[]>([]);
-  const [message, setMessage] = useState<string>("");
+  const [message, _ ] = useState<string>("");
 
   const loadFollowersFromStorage = (): Follower[] => {
     const followers = localStorage.getItem("followers");
